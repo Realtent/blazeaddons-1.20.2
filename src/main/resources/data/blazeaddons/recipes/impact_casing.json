@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category":"misc",
+  "pattern": [
+    "bmb",
+    "mbm",
+    "bmb"
+  ],
+  "key": {
+    "b": {
+      "item": "minecraft:nether_brick"
+    },
+    "m": {
+      "item": "minecraft:magma_cream"
+    }
+  }
+}

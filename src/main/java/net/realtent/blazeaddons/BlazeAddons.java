@@ -2,6 +2,9 @@ package net.realtent.blazeaddons;
 
 import net.fabricmc.api.ModInitializer;
 
+import net.realtent.blazeaddons.block.ModBlocks;
+import net.realtent.blazeaddons.item.ModItemGroups;
+import net.realtent.blazeaddons.item.ModItems;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,6 +15,9 @@ public class BlazeAddons implements ModInitializer {
 	@Override
 	public void onInitialize() {
 
-		LOGGER.info("Hello Fabric world!");
+		ModItemGroups.registerItemGroups();
+
+		ModItems.registerModItems();
+		ModBlocks.registerModBlocks();
 	}
 }
