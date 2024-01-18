@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/template_wall_post",
+  "textures": {
+    "wall": "blazeaddons:block/debug_blaze_rod_block"
+  }
+}

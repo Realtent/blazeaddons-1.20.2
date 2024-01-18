@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:nether_brick"
+    },
+    "M": {
+      "item": "minecraft:magma_cream"
+    }
+  },
+  "pattern": [
+    "BMB",
+    "MBM",
+    "BMB"
+  ],
+  "result": {
+    "item": "blazeaddons:impact_casing"
+  },
+  "show_notification": true
+}

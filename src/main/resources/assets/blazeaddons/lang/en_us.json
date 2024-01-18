@@ -1,8 +1,16 @@
 {
   "item.blazeaddons.impact_casing": "Impact Casing",
   "item.blazeaddons.primed_minirocket": "Primed Mini-Rocket",
+  "item.blazeaddons.minirocket": "Mini-Rocket",
 
   "block.blazeaddons.blaze_rod_block": "Blaze Rod Block",
+
+  "block.blazeaddons.blaze_rod_slab": "Blaze Rod Slab",
+  "block.blazeaddons.blaze_rod_stairs": "Blaze Rod Stairs",
+  "block.blazeaddons.blaze_rod_wall": "Blaze Rod Wall",
+  "block.blazeaddons.blaze_rod_fence": "Blaze Rod Fence",
+  "block.blazeaddons.blaze_rod_door": "Blaze Rod Door",
+  "block.blazeaddons.blaze_rod_trapdoor": "Blaze Rod Trapdoor",
 
   "itemgroup.blaze_addons": "Blaze Addons"
 }

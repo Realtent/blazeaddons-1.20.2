@@ -2,6 +2,6 @@
   "parent": "minecraft:block/cube_column",
   "textures": {
     "end": "blazeaddons:block/blaze_rod_block_top",
-    "side": "blazeaddons:block/blaze_rod_block_side"
+    "side": "blazeaddons:block/blaze_rod_block"
   }
 }

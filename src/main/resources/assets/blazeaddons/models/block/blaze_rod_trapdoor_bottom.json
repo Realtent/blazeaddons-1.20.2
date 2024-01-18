@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/template_trapdoor_bottom",
+  "textures": {
+    "texture": "blazeaddons:block/blaze_rod_trapdoor"
+  }
+}

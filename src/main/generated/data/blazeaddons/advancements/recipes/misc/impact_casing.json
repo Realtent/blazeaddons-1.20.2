@@ -1,0 +1,48 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_magma_cream": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:magma_cream"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_nether_brick": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:nether_brick"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:impact_casing"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_nether_brick",
+      "has_magma_cream"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:impact_casing"
+    ]
+  },
+  "sends_telemetry_event": false
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/fence_inventory",
+  "textures": {
+    "texture": "blazeaddons:block/debug_blaze_rod_block"
+  }
+}

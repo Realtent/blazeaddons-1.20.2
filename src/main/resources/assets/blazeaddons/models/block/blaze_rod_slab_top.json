@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "blazeaddons:block/debug_blaze_rod_block",
+    "side": "blazeaddons:block/debug_blaze_rod_block",
+    "top": "blazeaddons:block/debug_blaze_rod_block"
+  }
+}

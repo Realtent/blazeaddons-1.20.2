@@ -1,0 +1,5 @@
+// 1.20.2	2024-01-18T13:28:14.0770464	BlazeAddons/Tags for minecraft:block
+18ec53f16990490f4758ff1db1145d5bf8031e5f data\minecraft\tags\blocks\walls.json
+36c5b3d7c6523580f26f68babf3a5a0145c79c0d data\minecraft\tags\blocks\needs_iron_tool.json
+36c5b3d7c6523580f26f68babf3a5a0145c79c0d data\minecraft\tags\blocks\mineable\pickaxe.json
+f33b1b554f31f0d320035de3beb150fa12076c6f data\minecraft\tags\blocks\fences.json

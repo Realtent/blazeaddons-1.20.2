@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "blazeaddons:item/blaze_rod_block"
+    "layer0": "blazeaddons:item/primed_minirocket"
   }
 }

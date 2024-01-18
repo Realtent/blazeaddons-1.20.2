@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "blazeaddons:block/blaze_rod_slab"
+    },
+    "type=double": {
+      "model": "blazeaddons:block/debug_blaze_rod_block"
+    },
+    "type=top": {
+      "model": "blazeaddons:block/blaze_rod_slab_top"
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_top_left",
+  "textures": {
+    "bottom": "blazeaddons:block/blaze_rod_door_bottom",
+    "top": "blazeaddons:block/blaze_rod_door_top"
+  }
+}

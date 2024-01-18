@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "blazeaddons:blaze_rod_block",
+    "blazeaddons:blaze_rod_slab",
+    "blazeaddons:blaze_rod_stairs",
+    "blazeaddons:blaze_rod_wall",
+    "blazeaddons:blaze_rod_fence",
+    "blazeaddons:blaze_rod_door",
+    "blazeaddons:blaze_rod_trapdoor"
+  ]
+}

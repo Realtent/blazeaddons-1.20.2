@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": {
+      "item": "minecraft:blaze_powder"
+    },
+    "G": {
+      "item": "minecraft:gunpowder"
+    },
+    "I": {
+      "item": "blazeaddons:impact_casing"
+    }
+  },
+  "pattern": [
+    "BI",
+    "GB"
+  ],
+  "result": {
+    "item": "blazeaddons:primed_minirocket"
+  },
+  "show_notification": true
+}
