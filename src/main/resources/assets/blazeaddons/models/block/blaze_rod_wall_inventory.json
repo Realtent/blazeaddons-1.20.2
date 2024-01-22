@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/wall_inventory",
-  "textures": {
-    "wall": "blazeaddons:block/debug_blaze_rod_block"
-  }
-}

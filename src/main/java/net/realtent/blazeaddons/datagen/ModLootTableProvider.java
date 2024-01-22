@@ -26,15 +26,15 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
 
     @Override
     public void generate() {
-        /*
-        blazeRodItemDrops(ModBlocks.BLAZE_ROD_BLOCK, 16.0f, 20.0f);
-        blazeRodItemDrops(ModBlocks.BLAZE_ROD_SLAB, 8.0f, 10.0f);
-        blazeRodItemDrops(ModBlocks.BLAZE_ROD_STAIRS, 12.0f, 15.0f);
-        blazeRodItemDrops(ModBlocks.BLAZE_ROD_FENCE, 8.0f, 10.0f);
-        blazeRodItemDrops(ModBlocks.BLAZE_ROD_WALL, 10.0f, 14.0f);
-        blazeRodItemDrops(ModBlocks.BLAZE_ROD_DOOR, 10.0f, 12.0f);
-        blazeRodItemDrops(ModBlocks.BLAZE_ROD_TRAPDOOR, 8.0f, 12.0f);
-        */
+
+        addDrop(ModBlocks.BLAZE_ROD_BLOCK, blazeRodItemDrops(ModBlocks.BLAZE_ROD_BLOCK, 16.0f, 20.0f));
+        addDrop(ModBlocks.BLAZE_ROD_SLAB, blazeRodItemDrops(ModBlocks.BLAZE_ROD_SLAB, 8.0f, 10.0f));
+        addDrop(ModBlocks.BLAZE_ROD_STAIRS, blazeRodItemDrops(ModBlocks.BLAZE_ROD_STAIRS, 16.0f, 20.0f));
+        addDrop(ModBlocks.BLAZE_ROD_FENCE, blazeRodItemDrops(ModBlocks.BLAZE_ROD_FENCE, 8.0f, 10.0f));
+        addDrop(ModBlocks.BLAZE_ROD_WALL, blazeRodItemDrops(ModBlocks.BLAZE_ROD_WALL, 10.0f, 14.0f));
+        addDrop(ModBlocks.BLAZE_ROD_DOOR, blazeRodItemDrops(ModBlocks.BLAZE_ROD_DOOR, 10.0f, 14.0f));
+        addDrop(ModBlocks.BLAZE_ROD_TRAPDOOR, blazeRodItemDrops(ModBlocks.BLAZE_ROD_TRAPDOOR, 8.0f, 12.0f));
+
     }
 
     public LootTable.Builder blazeRodItemDrops(Block drop, float min, float max) {

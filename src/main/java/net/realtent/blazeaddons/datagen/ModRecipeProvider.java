@@ -46,19 +46,35 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         RecipeProvider.createStairsRecipe(ModBlocks.BLAZE_ROD_STAIRS, Ingredient.ofItems(ModBlocks.BLAZE_ROD_BLOCK))
                 .criterion(RecipeProvider.hasItem(ModBlocks.BLAZE_ROD_BLOCK), RecipeProvider.conditionsFromItem(ModBlocks.BLAZE_ROD_BLOCK))
                 .offerTo(exporter);
+
         ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, ModBlocks.BLAZE_ROD_FENCE, 8)
                 .pattern("W#W")
                 .pattern("W#W")
                 .input('W', ModBlocks.BLAZE_ROD_BLOCK)
-                .input('#', Items.BLAZE_ROD);
-        offerWallRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.BLAZE_ROD_WALL, Items.BLAZE_ROD);
+                .input('#', Items.BLAZE_ROD)
+                .criterion(hasItem(Items.BLAZE_ROD), conditionsFromItem(Items.BLAZE_ROD))
+                .offerTo(exporter, new Identifier(getRecipeName(ModBlocks.BLAZE_ROD_FENCE)));
+
+        offerWallRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.BLAZE_ROD_WALL, ModBlocks.BLAZE_ROD_BLOCK);
+
         RecipeProvider.createDoorRecipe(ModBlocks.BLAZE_ROD_DOOR, Ingredient.ofItems(Items.BLAZE_ROD))
                 .criterion(RecipeProvider.hasItem(Items.BLAZE_ROD), RecipeProvider.conditionsFromItem(Items.BLAZE_ROD))
                 .offerTo(exporter);
+
         ShapedRecipeJsonBuilder.create(RecipeCategory.REDSTONE, ModBlocks.BLAZE_ROD_TRAPDOOR, 1)
                 .pattern(" # ")
                 .pattern("###")
                 .pattern(" # ")
                 .input('#', Items.BLAZE_ROD);
+
+
+
+        offerShapelessRecipe(exporter, Items.BLAZE_POWDER, ModBlocks.BLAZE_ROD_BLOCK,null,18);
+        offerShapelessRecipe(exporter, Items.BLAZE_POWDER, ModBlocks.BLAZE_ROD_SLAB,null,9);
+        offerShapelessRecipe(exporter, Items.BLAZE_POWDER, ModBlocks.BLAZE_ROD_STAIRS,null,18);
+        offerShapelessRecipe(exporter, Items.BLAZE_POWDER, ModBlocks.BLAZE_ROD_FENCE,null,9);
+        offerShapelessRecipe(exporter, Items.BLAZE_POWDER, ModBlocks.BLAZE_ROD_WALL,null,12);
+        offerShapelessRecipe(exporter, Items.BLAZE_POWDER, ModBlocks.BLAZE_ROD_DOOR,null,12);
+        offerShapelessRecipe(exporter, Items.BLAZE_POWDER, ModBlocks.BLAZE_ROD_TRAPDOOR,null,10);
     }
 }

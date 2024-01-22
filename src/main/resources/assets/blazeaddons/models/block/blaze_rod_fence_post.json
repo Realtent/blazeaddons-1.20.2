@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/fence_post",
-  "textures": {
-    "texture": "blazeaddons:block/debug_blaze_rod_block"
-  }
-}

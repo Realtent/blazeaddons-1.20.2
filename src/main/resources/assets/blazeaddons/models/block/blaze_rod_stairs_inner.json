@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/inner_stairs",
-  "textures": {
-    "bottom": "blazeaddons:block/debug_blaze_rod_block",
-    "side": "blazeaddons:block/debug_blaze_rod_block",
-    "top": "blazeaddons:block/debug_blaze_rod_block"
-  }
-}

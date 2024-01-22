@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "blazeaddons:blaze_rod_wall"
+    }
+  ],
+  "result": {
+    "count": 12,
+    "item": "minecraft:blaze_powder"
+  }
+}

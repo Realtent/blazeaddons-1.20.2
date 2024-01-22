@@ -24,9 +24,16 @@ public class ModItemGroups {
                         entries.add(ModItems.IMPACT_CASING);
                         entries.add(ModItems.PRIMED_MINIROCKET);
 
+                        entries.add(ModItems.MINIROCKET);
+
                         entries.add(ModBlocks.BLAZE_ROD_BLOCK);
 
-
+                        entries.add(ModBlocks.BLAZE_ROD_SLAB);
+                        entries.add(ModBlocks.BLAZE_ROD_STAIRS);
+                        entries.add(ModBlocks.BLAZE_ROD_WALL);
+                        entries.add(ModBlocks.BLAZE_ROD_FENCE);
+                        entries.add(ModBlocks.BLAZE_ROD_DOOR);
+                        entries.add(ModBlocks.BLAZE_ROD_TRAPDOOR);
                     }).build());
 
 

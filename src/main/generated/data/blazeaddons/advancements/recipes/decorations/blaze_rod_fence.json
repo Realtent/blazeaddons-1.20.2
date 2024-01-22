@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_blaze_rod_block": {
+    "has_blaze_rod": {
       "conditions": {
         "items": [
           {
             "items": [
-              "blazeaddons:blaze_rod_block"
+              "minecraft:blaze_rod"
             ]
           }
         ]
@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "blazeaddons:blaze_rod_wall"
+        "recipe": "minecraft:blaze_rod_fence"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -23,12 +23,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_blaze_rod_block"
+      "has_blaze_rod"
     ]
   ],
   "rewards": {
     "recipes": [
-      "blazeaddons:blaze_rod_wall"
+      "minecraft:blaze_rod_fence"
     ]
   },
   "sends_telemetry_event": false

@@ -2,9 +2,12 @@ package net.realtent.blazeaddons;
 
 import net.fabricmc.api.ModInitializer;
 
+import net.fabricmc.fabric.api.registry.FuelRegistry;
+import net.minecraft.item.Items;
 import net.realtent.blazeaddons.block.ModBlocks;
 import net.realtent.blazeaddons.item.ModItemGroups;
 import net.realtent.blazeaddons.item.ModItems;
+import net.realtent.blazeaddons.util.ModLootTableModifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,5 +22,9 @@ public class BlazeAddons implements ModInitializer {
 
 		ModItems.registerModItems();
 		ModBlocks.registerModBlocks();
+
+		ModLootTableModifier.modifyLootTables();
+
+		FuelRegistry.INSTANCE.add(Items.BLAZE_POWDER, 1000);
 	}
 }
