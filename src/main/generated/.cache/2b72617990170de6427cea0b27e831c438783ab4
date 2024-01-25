@@ -1,4 +1,4 @@
-// 1.20.2	2024-01-21T18:26:23.9066898	BlazeAddons/Recipes
+// 1.20.2	2024-01-24T20:11:01.9869555	BlazeAddons/Recipes
 d2cbe30fe5d9ff526b050c3c3b14010657dd6901 data\blazeaddons\advancements\recipes\misc\impact_casing.json
 986600f2bd051eeffcda32437d334d4f6ac08c3e data\blazeaddons\recipes\blaze_powder_from_blaze_rod_block.json
 3675124d7ed01f9af2cef748be847836f84028b1 data\blazeaddons\advancements\recipes\redstone\blaze_rod_door.json
@@ -6,8 +6,8 @@ d3545cbef6f94ba4b34631469b8ec86d1637ecf1 data\blazeaddons\recipes\blaze_powder_f
 378056a5b9b5372d545c9820e815ab66490dd4f1 data\blazeaddons\recipes\blaze_powder_from_blaze_rod_fence.json
 c4e3dc5ab67a53a47d881972f6d43a5d95beaa81 data\blazeaddons\recipes\primed_minirocket.json
 3c80bf4987ae70f60b10dcc9eac5f13a5d9f5d42 data\blazeaddons\recipes\blaze_rod_stairs.json
-fa4bc7eff4b7e4922a68884587d1fc3e9cd6dcd1 data\blazeaddons\recipes\blaze_powder_from_blaze_rod_door.json
 1b197288782959a6b578dffa9277fa8f3fba536a data\blazeaddons\advancements\recipes\misc\blaze_powder_from_blaze_rod_wall.json
+fa4bc7eff4b7e4922a68884587d1fc3e9cd6dcd1 data\blazeaddons\recipes\blaze_powder_from_blaze_rod_door.json
 546b4c1bd98d253ac76121053068040f70255781 data\blazeaddons\recipes\blaze_powder_from_blaze_rod_trapdoor.json
 74f8a8278881fb5d28fef40f50ce1fcc90ca7881 data\blazeaddons\advancements\recipes\misc\blaze_powder_from_blaze_rod_slab.json
 0eab4896b974f354292e073669e3ecce0dfb0a7a data\blazeaddons\advancements\recipes\misc\blaze_powder_from_blaze_rod_trapdoor.json
