@@ -25,15 +25,16 @@ public class BlazeboltEntity
     LivingEntity entityType;
 
     public BlazeboltEntity(World world, LivingEntity owner) {
-        super(EntityType.SPECTRAL_ARROW, owner, world);
+        super(ModEntities.BLAZEBOLT, owner, world);
     }
 
     public BlazeboltEntity(World world, double x, double y, double z) {
-        super(EntityType.SPECTRAL_ARROW, x, y, z, world);
+        super(ModEntities.BLAZEBOLT, x, y, z, world);
     }
 
-    public BlazeboltEntity(EntityType<Entity> entityType, World world) {
-        super((EntityType<? extends PersistentProjectileEntity>) entityType, world);
+
+    public BlazeboltEntity(EntityType<? extends BlazeboltEntity> entityType, World world) {
+        super(entityType, world);
     }
 
 

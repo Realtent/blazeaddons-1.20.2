@@ -34,6 +34,8 @@ public class ModItemGroups {
                         entries.add(ModBlocks.BLAZE_ROD_FENCE);
                         entries.add(ModBlocks.BLAZE_ROD_DOOR);
                         entries.add(ModBlocks.BLAZE_ROD_TRAPDOOR);
+
+                        entries.add(ModItems.BLAZEBOLT);
                     }).build());
 
 

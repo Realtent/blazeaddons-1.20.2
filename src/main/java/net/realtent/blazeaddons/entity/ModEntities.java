@@ -17,9 +17,9 @@ public class ModEntities {
             FabricEntityTypeBuilder.<MinirocketProjectileEntity>create(SpawnGroup.MISC, MinirocketProjectileEntity::new)
                     .dimensions(EntityDimensions.fixed(0.5f, 0.5f)).build());
 
-    public static final EntityType<MinirocketProjectileEntity> BLAZEBOLT_ENTITY = Registry.register(Registries.ENTITY_TYPE,
-            new Identifier(BlazeAddons.MOD_ID, "blazebolt_entity"),
-            FabricEntityTypeBuilder.<MinirocketProjectileEntity>create(SpawnGroup.MISC, BlazeboltEntity:: new)
+    public static final EntityType<BlazeboltEntity> BLAZEBOLT = Registry.register(Registries.ENTITY_TYPE,
+            new Identifier(BlazeAddons.MOD_ID, "blazebolt"),
+            FabricEntityTypeBuilder.<BlazeboltEntity>create(SpawnGroup.MISC, BlazeboltEntity::new)
                     .dimensions(EntityDimensions.fixed(0.5f, 0.5f)).build());
 
 }

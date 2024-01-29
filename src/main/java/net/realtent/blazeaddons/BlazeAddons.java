@@ -4,10 +4,14 @@ import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
+import net.minecraft.client.render.entity.ArrowEntityRenderer;
 import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
+import net.minecraft.client.render.entity.ProjectileEntityRenderer;
 import net.minecraft.item.Items;
+import net.minecraft.util.Identifier;
 import net.realtent.blazeaddons.block.ModBlocks;
 import net.realtent.blazeaddons.entity.ModEntities;
+import net.realtent.blazeaddons.entity.projectile.BlazeboltEntity;
 import net.realtent.blazeaddons.item.ModItemGroups;
 import net.realtent.blazeaddons.item.ModItems;
 import net.realtent.blazeaddons.util.ModLootTableModifier;
@@ -30,6 +34,6 @@ public class BlazeAddons implements ModInitializer {
 
 		FuelRegistry.INSTANCE.add(Items.BLAZE_POWDER, 1000);
 
-		EntityRendererRegistry.register(ModEntities.MINIROCKET_PROJECTILE, FlyingItemEntityRenderer::new);
+
 	}
 }

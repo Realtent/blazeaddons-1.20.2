@@ -34,5 +34,7 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.IMPACT_CASING, Models.GENERATED);
         itemModelGenerator.register(ModItems.PRIMED_MINIROCKET, Models.GENERATED);
         itemModelGenerator.register(ModItems.MINIROCKET, Models.GENERATED);
+
+        itemModelGenerator.register(ModItems.BLAZEBOLT, Models.GENERATED);
     }
 }
