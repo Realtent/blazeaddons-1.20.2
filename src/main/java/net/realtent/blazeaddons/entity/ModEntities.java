@@ -9,6 +9,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.realtent.blazeaddons.BlazeAddons;
 import net.realtent.blazeaddons.entity.custom.MinirocketProjectileEntity;
+import net.realtent.blazeaddons.entity.projectile.BlazeboltEntity;
 
 public class ModEntities {
     public static final EntityType<MinirocketProjectileEntity> MINIROCKET_PROJECTILE = Registry.register(Registries.ENTITY_TYPE,
@@ -16,5 +17,9 @@ public class ModEntities {
             FabricEntityTypeBuilder.<MinirocketProjectileEntity>create(SpawnGroup.MISC, MinirocketProjectileEntity::new)
                     .dimensions(EntityDimensions.fixed(0.5f, 0.5f)).build());
 
+    public static final EntityType<MinirocketProjectileEntity> BLAZEBOLT_ENTITY = Registry.register(Registries.ENTITY_TYPE,
+            new Identifier(BlazeAddons.MOD_ID, "blazebolt_entity"),
+            FabricEntityTypeBuilder.<MinirocketProjectileEntity>create(SpawnGroup.MISC, BlazeboltEntity:: new)
+                    .dimensions(EntityDimensions.fixed(0.5f, 0.5f)).build());
 
 }

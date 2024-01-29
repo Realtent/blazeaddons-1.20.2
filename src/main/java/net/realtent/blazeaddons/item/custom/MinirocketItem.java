@@ -23,13 +23,12 @@ public class MinirocketItem extends Item {
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
-        world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_FIREWORK_ROCKET_LAUNCH, SoundCategory.PLAYERS, 0.5f, 0.8f / (world.getRandom().nextFloat() * 0.2f + 0.8f));
+        world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_FIREWORK_ROCKET_LAUNCH, SoundCategory.PLAYERS, 0.5f, 0.4f / (world.getRandom().nextFloat() * 0.4f + 0.8f));
         if (!world.isClient) {
             MinirocketProjectileEntity minirocketProjectile = new MinirocketProjectileEntity(user, world);
             minirocketProjectile.setItem(itemStack);
-            minirocketProjectile.setVelocity(user, (user.getPitch()/3)+30, user.getYaw(), 3.0f, 5f, 1.0f);
+            minirocketProjectile.setVelocity(user, user.getPitch(), user.getYaw(), 0.5f, 2.5f, 0.75f);
             world.spawnEntity(minirocketProjectile);
-            user.sendMessage(Text.of(String.valueOf(user.getPitch())));
         }
         user.incrementStat(Stats.USED.getOrCreateStat(this));
         if (!user.getAbilities().creativeMode) {
