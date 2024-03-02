@@ -21,7 +21,7 @@ public class ModLootTableModifier {
         LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
             if(NETHER_FORTRESS_ID.equals(id)){
                 LootPool.Builder poolBuilder = LootPool.builder()
-                        .rolls(ConstantLootNumberProvider.create(2))
+                        .rolls(ConstantLootNumberProvider.create(3))
                         .conditionally(RandomChanceLootCondition.builder(0.01f)) // Drops 1% of the time
                         .with(ItemEntry.builder(ModBlocks.BLAZE_ROD_BLOCK))
                         .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 1.0f)).build())
@@ -46,9 +46,14 @@ public class ModLootTableModifier {
                         .conditionally(RandomChanceLootCondition.builder(0.1f)) // Drops 10% of the time
                         .with(ItemEntry.builder(ModItems.IMPACT_CASING))
                         .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 1.0f)).build())
-                        .conditionally(RandomChanceLootCondition.builder(0.05f)) // Drops 5% of the time
+                        .conditionally(RandomChanceLootCondition.builder(0.1f)) // Drops 10% of the time
+                        .with(ItemEntry.builder(ModItems.PRIMED_MINIROCKET))
+                        .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 1.0f)).build())
+                        .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 1.0f)).build())
+                        .conditionally(RandomChanceLootCondition.builder(0.15f)) // Drops 15% of the time
                         .with(ItemEntry.builder(ModItems.PRIMED_MINIROCKET))
                         .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 1.0f)).build());
+
 
                 tableBuilder.pool(poolBuilder.build());
             }

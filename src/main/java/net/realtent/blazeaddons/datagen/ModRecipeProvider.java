@@ -65,8 +65,18 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .pattern(" # ")
                 .pattern("###")
                 .pattern(" # ")
-                .input('#', Items.BLAZE_ROD);
+                .input('#', Items.BLAZE_ROD)
+                .criterion(hasItem(Items.BLAZE_ROD), conditionsFromItem(Items.BLAZE_ROD))
+                .offerTo(exporter, new Identifier(getRecipeName(ModBlocks.BLAZE_ROD_TRAPDOOR)));
 
+        ShapedRecipeJsonBuilder.create(RecipeCategory.REDSTONE, ModBlocks.BLAZE_ROD_TRAPDOOR, 1)
+                .pattern("p")
+                .pattern("#")
+                .pattern("p")
+                .input('#', Items.BLAZE_ROD)
+                .input('p', ModItems.PRIMED_MINIROCKET)
+                .criterion(hasItem(ModItems.PRIMED_MINIROCKET), conditionsFromItem(ModItems.PRIMED_MINIROCKET))
+                .offerTo(exporter, new Identifier(getRecipeName(ModItems.BLAZEBOLT)));
 
 
         offerShapelessRecipe(exporter, Items.BLAZE_POWDER, ModBlocks.BLAZE_ROD_BLOCK,null,18);

@@ -3,9 +3,11 @@
  */
 package net.realtent.blazeaddons.entity.projectile;
 
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
@@ -15,6 +17,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.world.World;
 import net.realtent.blazeaddons.entity.ModEntities;
 import net.realtent.blazeaddons.entity.custom.MinirocketProjectileEntity;
@@ -37,6 +43,12 @@ public class BlazeboltEntity
         super(entityType, world);
     }
 
+    @Override
+    protected void onEntityHit(EntityHitResult entityHitResult) {
+        this.getWorld().createExplosion(this, this.getX(), this.getBodyY(0.0625), this.getZ(), 2.0f, World.ExplosionSourceType.NONE);
+        super.onEntityHit(entityHitResult);
+    }
+
 
     @Override
     public void tick() {
@@ -47,8 +59,18 @@ public class BlazeboltEntity
     }
 
     @Override
+    protected void onBlockHit(BlockHitResult blockHitResult) {
+        this.getWorld().createExplosion(this, this.getX(), this.getBodyY(0.0625), this.getZ(), 3.0f, World.ExplosionSourceType.NONE);
+        super.onBlockHit(blockHitResult);
+    }
+
+    @Override
     protected ItemStack asItemStack() {
         return new ItemStack(ModItems.BLAZEBOLT);
+    }
+
+    protected boolean isBurning() {
+        return true;
     }
 
 

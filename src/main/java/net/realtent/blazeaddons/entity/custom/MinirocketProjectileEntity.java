@@ -95,12 +95,19 @@ public class MinirocketProjectileEntity extends ThrownItemEntity {
     @Override
     public boolean damage(DamageSource source, float amount) {
         if (!this.getWorld().isClient) {
-            this.playSound(SoundEvents.BLOCK_ANVIL_FALL, 1.0f, 1.5f);
+            this.playSound(SoundEvents.ENTITY_GENERIC_EXPLODE, 1.3f, 1.5f);
             ((ServerWorld)this.getWorld()).spawnParticles(ParticleTypes.EXPLOSION, this.getX(), this.getY(), this.getZ(), 4, 0.2, 0.2, 0.2, 0.0);
 
             this.discard();
         }
         return true;
+    }
+
+    public void tick() {
+        super.tick();
+        if (this.getWorld().isClient) {
+            this.getWorld().addParticle(ParticleTypes.FLAME, this.getX(), this.getY(), this.getZ(), 0.0, 0.0, 0.0);
+        }
     }
 
     public boolean canHit() {
@@ -114,4 +121,6 @@ public class MinirocketProjectileEntity extends ThrownItemEntity {
     protected boolean isBurning() {
         return true;
     }
+
+
 }
