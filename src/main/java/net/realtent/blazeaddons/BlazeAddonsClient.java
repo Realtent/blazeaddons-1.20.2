@@ -9,6 +9,7 @@ import net.minecraft.util.Identifier;
 import net.realtent.blazeaddons.entity.ModEntities;
 import net.realtent.blazeaddons.entity.client.BlazeboltRenderer;
 import net.realtent.blazeaddons.entity.client.FirespriteModel;
+import net.realtent.blazeaddons.entity.client.FirespriteRenderer;
 import net.realtent.blazeaddons.entity.client.ModModelLayers;
 import net.realtent.blazeaddons.entity.projectile.BlazeboltEntity;
 
@@ -19,6 +20,7 @@ public class BlazeAddonsClient implements ClientModInitializer {
 
         EntityRendererRegistry.register(ModEntities.BLAZEBOLT, BlazeboltRenderer::new);
 
+        EntityRendererRegistry.register(ModEntities.FIRESPRITE, FirespriteRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.FIRESPRITE, FirespriteModel::getTexturedModelData);
     }
 }

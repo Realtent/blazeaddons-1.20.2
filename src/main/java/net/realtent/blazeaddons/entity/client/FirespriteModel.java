@@ -19,10 +19,10 @@ public class FirespriteModel<T extends FirespriteEntity> extends SinglePartEntit
 	private final ModelPart WE;
 	public FirespriteModel(ModelPart root) {
 		this.mainbody = root.getChild("mainbody");
-		this.maincube = root.getChild("maincube");
-		this.spinners = root.getChild("spinners");
-		this.NS = root.getChild("NS");
-		this.WE = root.getChild("WE");
+		this.maincube = mainbody.getChild("maincube");
+		this.spinners = mainbody.getChild("spinners");
+		this.NS = spinners.getChild("NS");
+		this.WE = spinners.getChild("WE");
 	}
 	public static TexturedModelData getTexturedModelData() {
 		ModelData modelData = new ModelData();

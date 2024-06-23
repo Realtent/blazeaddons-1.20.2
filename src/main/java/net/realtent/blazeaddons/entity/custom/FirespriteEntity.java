@@ -68,6 +68,11 @@ public class FirespriteEntity extends FlyingEntity implements Monster {
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.5);
     }
 
+    protected void initDataTracker() {
+        super.initDataTracker();
+        this.dataTracker.startTracking(FUSE_SPEED, -1);
+    }
+
     @Override
     public void writeCustomDataToNbt(NbtCompound nbt) {
         super.writeCustomDataToNbt(nbt);
