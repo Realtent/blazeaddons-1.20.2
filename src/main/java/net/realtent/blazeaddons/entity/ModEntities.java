@@ -8,6 +8,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.realtent.blazeaddons.BlazeAddons;
+import net.realtent.blazeaddons.entity.custom.FirespriteEntity;
 import net.realtent.blazeaddons.entity.custom.MinirocketProjectileEntity;
 import net.realtent.blazeaddons.entity.projectile.BlazeboltEntity;
 
@@ -21,5 +22,10 @@ public class ModEntities {
             new Identifier(BlazeAddons.MOD_ID, "blazebolt"),
             FabricEntityTypeBuilder.<BlazeboltEntity>create(SpawnGroup.MISC, BlazeboltEntity::new)
                     .dimensions(EntityDimensions.fixed(0.5f, 0.5f)).build());
+
+    public static final EntityType<FirespriteEntity> FIRESPRITE = Registry.register(Registries.ENTITY_TYPE,
+            new Identifier(BlazeAddons.MOD_ID, "firesprite"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MISC, FirespriteEntity::new)
+                    .dimensions(EntityDimensions.fixed(1.2f,1.2f)).build());
 
 }

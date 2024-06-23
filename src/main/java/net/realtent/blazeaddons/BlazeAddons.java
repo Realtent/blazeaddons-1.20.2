@@ -3,6 +3,7 @@ package net.realtent.blazeaddons;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.client.render.entity.ArrowEntityRenderer;
 import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
@@ -11,6 +12,7 @@ import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
 import net.realtent.blazeaddons.block.ModBlocks;
 import net.realtent.blazeaddons.entity.ModEntities;
+import net.realtent.blazeaddons.entity.custom.FirespriteEntity;
 import net.realtent.blazeaddons.entity.projectile.BlazeboltEntity;
 import net.realtent.blazeaddons.item.ModItemGroups;
 import net.realtent.blazeaddons.item.ModItems;
@@ -34,6 +36,6 @@ public class BlazeAddons implements ModInitializer {
 
 		FuelRegistry.INSTANCE.add(Items.BLAZE_POWDER, 1000);
 
-
+		FabricDefaultAttributeRegistry.register(ModEntities.FIRESPRITE, FirespriteEntity.createFirespriteAttributes());
 	}
 }
