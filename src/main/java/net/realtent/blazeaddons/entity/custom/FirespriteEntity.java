@@ -1,9 +1,7 @@
 package net.realtent.blazeaddons.entity.custom;
 
-import net.minecraft.entity.AreaEffectCloudEntity;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.ai.control.FlightMoveControl;
 import net.minecraft.entity.ai.control.MoveControl;
@@ -20,12 +18,14 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.mob.*;
+import net.minecraft.entity.passive.BeeEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.raid.RaiderEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
@@ -36,22 +36,27 @@ import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
+import net.minecraft.world.Difficulty;
+import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldEvents;
 import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.EnumSet;
+import java.util.List;
+import java.util.function.Predicate;
 
 public class FirespriteEntity extends HostileEntity {
     private static final TrackedData<Integer> FUSE_SPEED = DataTracker.registerData(FirespriteEntity.class, TrackedDataHandlerRegistry.INTEGER);
-    protected static final TrackedData<Byte> FIRESPRITE_FLAGS = DataTracker.registerData(VexEntity.class, TrackedDataHandlerRegistry.BYTE);
     private static final int CHARGING_FLAG = 1;
     private int lastFuseTime;
     private int currentFuseTime;
     private int fuseTime = 30;
     private int explosionRadius = 3;
-    private BlockPos bounds;
+    private static final TrackedData<Integer> TRACKED_ENTITY_ID = DataTracker.registerData(FirespriteEntity.class, TrackedDataHandlerRegistry.INTEGER);
+    private static final TargetPredicate HEAD_TARGET_PREDICATE = TargetPredicate.createAttackable().setBaseMaxDistance(20.0).setPredicate(Entity::isPlayer);
     public FirespriteEntity(EntityType<? extends FirespriteEntity> entityType, World world) {
 
         super((EntityType<? extends HostileEntity>)entityType, world);
@@ -59,7 +64,7 @@ public class FirespriteEntity extends HostileEntity {
         this.setPathfindingPenalty(PathNodeType.LAVA, 4.0f);
         this.setPathfindingPenalty(PathNodeType.DANGER_FIRE, 0.0f);
         this.setPathfindingPenalty(PathNodeType.DAMAGE_FIRE, 0.0f);
-        this.moveControl = new FlightMoveControl(this, 10, false);
+        this.moveControl = new FlightMoveControl(this, 2, false);
         this.experiencePoints = 2;
     }
     @Override
@@ -75,11 +80,10 @@ public class FirespriteEntity extends HostileEntity {
     protected void initGoals() {
         this.goalSelector.add(1,new SwimGoal(this));
         this.goalSelector.add(2, new FirespriteIgniteGoal(this));
-        this.goalSelector.add(4, new ChargeTargetGoal());
-        this.goalSelector.add(5, new FlyGoal(this, 1.0));
+        this.goalSelector.add(3, new FirespriteAttackGoal(this, 1.0, true));
+        this.goalSelector.add(5, new FlyGoal(this, 0.5));
         this.goalSelector.add(6, new LookAtEntityGoal(this, PlayerEntity.class, 8.0f));
         this.goalSelector.add(7, new LookAroundGoal(this));
-        this.goalSelector.add(10, new FlyGoal(this, 1.0));
         this.targetSelector.add(1, new ActiveTargetGoal<>(this, PlayerEntity.class, false, false));
     }
     public static DefaultAttributeContainer.Builder createFirespriteAttributes(){
@@ -245,117 +249,22 @@ public class FirespriteEntity extends HostileEntity {
         }
     }
 
-    class LookAtTargetGoal
-            extends Goal {
-        public LookAtTargetGoal() {
-            this.setControls(EnumSet.of(Goal.Control.MOVE));
+    class FirespriteAttackGoal
+            extends MeleeAttackGoal {
+
+        public FirespriteAttackGoal(PathAwareEntity mob, double speed, boolean pauseWhenMobIdle) {
+            super(mob, speed, pauseWhenMobIdle);
         }
 
         @Override
         public boolean canStart() {
-            return !FirespriteEntity.this.getMoveControl().isMoving();
+            return super.canStart();
         }
 
         @Override
         public boolean shouldContinue() {
-            return false;
-        }
-
-        @Override
-        public void tick() {
-            BlockPos blockPos = FirespriteEntity.this.getBounds();
-            if (blockPos == null) {
-                blockPos = FirespriteEntity.this.getBlockPos();
-            }
-            for (int i = 0; i < 3; ++i) {
-                BlockPos blockPos2 = blockPos.add(FirespriteEntity.this.random.nextInt(15) - 7, FirespriteEntity.this.random.nextInt(11) - 5, FirespriteEntity.this.random.nextInt(15) - 7);
-                if (!FirespriteEntity.this.getWorld().isAir(blockPos2)) continue;
-                FirespriteEntity.this.moveControl.moveTo((double)blockPos2.getX() + 0.5, (double)blockPos2.getY() + 0.5, (double)blockPos2.getZ() + 0.5, 0.25);
-                if (FirespriteEntity.this.getTarget() != null) break;
-                FirespriteEntity.this.getLookControl().lookAt((double)blockPos2.getX() + 0.5, (double)blockPos2.getY() + 0.5, (double)blockPos2.getZ() + 0.5, 180.0f, 20.0f);
-                break;
-            }
-        }
-    }
-    class ChargeTargetGoal
-            extends Goal {
-        public ChargeTargetGoal() {
-            this.setControls(EnumSet.of(Goal.Control.MOVE));
-        }
-
-        @Override
-        public boolean canStart() {
-            LivingEntity livingEntity = FirespriteEntity.this.getTarget();
-            if (livingEntity != null && livingEntity.isAlive() && !FirespriteEntity.this.getMoveControl().isMoving()){
-                return FirespriteEntity.this.squaredDistanceTo(livingEntity) > 4.0;
-            }
-            return false;
-        }
-
-        @Override
-        public boolean shouldContinue() {
-            return FirespriteEntity.this.getMoveControl().isMoving() && FirespriteEntity.this.isCharging() && FirespriteEntity.this.getTarget() != null && FirespriteEntity.this.getTarget().isAlive();
-        }
-
-        @Override
-        public void start() {
-            LivingEntity livingEntity = FirespriteEntity.this.getTarget();
-            if (livingEntity != null) {
-                Vec3d vec3d = livingEntity.getEyePos();
-                FirespriteEntity.this.moveControl.moveTo(vec3d.x, vec3d.y, vec3d.z, 1.0);
-            }
-            FirespriteEntity.this.setCharging(true);
-            FirespriteEntity.this.playSound(SoundEvents.ENTITY_VEX_CHARGE, 1.0f, 1.0f);
-        }
-
-        @Override
-        public void stop() {
-            FirespriteEntity.this.setCharging(false);
-        }
-
-        @Override
-        public boolean shouldRunEveryTick() {
-            return true;
-        }
-
-        @Override
-        public void tick() {
-            LivingEntity livingEntity = FirespriteEntity.this.getTarget();
-            if (livingEntity == null) {
-                return;
-            }
-            if (FirespriteEntity.this.getBoundingBox().intersects(livingEntity.getBoundingBox())) {
-                FirespriteEntity.this.tryAttack(livingEntity);
-                FirespriteEntity.this.setCharging(false);
-            } else {
-                double d = FirespriteEntity.this.squaredDistanceTo(livingEntity);
-                if (d < 9.0) {
-                    Vec3d vec3d = livingEntity.getEyePos();
-                    FirespriteEntity.this.moveControl.moveTo(vec3d.x, vec3d.y, vec3d.z, 1.0);
-                }
-            }
+            return super.shouldContinue();
         }
     }
 
-    public boolean isCharging() {
-        return this.areFlagsSet(CHARGING_FLAG);
-    }
-
-    public void setCharging(boolean charging) {
-        this.setFirespriteFlag(CHARGING_FLAG, charging);
-    }
-    private boolean areFlagsSet(int mask) {
-        byte i = this.dataTracker.get(FIRESPRITE_FLAGS);
-        return (i & mask) != 0;
-    }
-
-    private void setFirespriteFlag(int mask, boolean value) {
-        int i = this.dataTracker.get(FIRESPRITE_FLAGS).byteValue();
-        i = value ? (i |= mask) : (i &= ~mask);
-        this.dataTracker.set(FIRESPRITE_FLAGS, (byte)(i & 0xFF));
-    }
-    @Nullable
-    public BlockPos getBounds() {
-        return this.bounds;
-    }
 }
