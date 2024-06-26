@@ -26,6 +26,6 @@ public class ModEntities {
     public static final EntityType<FirespriteEntity> FIRESPRITE = Registry.register(Registries.ENTITY_TYPE,
             new Identifier(BlazeAddons.MOD_ID, "firesprite"),
             FabricEntityTypeBuilder.create(SpawnGroup.MISC, FirespriteEntity::new)
-                    .dimensions(EntityDimensions.fixed(1.2f,1.2f)).build());
+                    .dimensions(EntityDimensions.fixed(2.0f,2.0f)).build());
 
 }

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "blazeaddons:block/debug_blaze_rod_block"
+  }
+}

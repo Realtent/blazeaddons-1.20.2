@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "#": {
+      "item": "minecraft:blaze_rod"
+    },
+    "p": {
+      "item": "blazeaddons:primed_minirocket"
+    }
+  },
+  "pattern": [
+    "p",
+    "#",
+    "p"
+  ],
+  "result": {
+    "item": "blazeaddons:blaze_rod_trapdoor"
+  },
+  "show_notification": true
+}

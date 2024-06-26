@@ -2,6 +2,8 @@ package net.realtent.blazeaddons.entity.custom;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
+import net.minecraft.entity.ai.AboveGroundTargeting;
+import net.minecraft.entity.ai.NoPenaltySolidTargeting;
 import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.ai.control.FlightMoveControl;
 import net.minecraft.entity.ai.control.MoveControl;
@@ -36,10 +38,7 @@ import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
-import net.minecraft.world.Difficulty;
-import net.minecraft.world.GameRules;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldEvents;
+import net.minecraft.world.*;
 import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
 
@@ -55,16 +54,14 @@ public class FirespriteEntity extends HostileEntity {
     private int currentFuseTime;
     private int fuseTime = 30;
     private int explosionRadius = 3;
-    private static final TrackedData<Integer> TRACKED_ENTITY_ID = DataTracker.registerData(FirespriteEntity.class, TrackedDataHandlerRegistry.INTEGER);
-    private static final TargetPredicate HEAD_TARGET_PREDICATE = TargetPredicate.createAttackable().setBaseMaxDistance(20.0).setPredicate(Entity::isPlayer);
+    public final AnimationState idleAnimationState = new AnimationState();
+    private int idleAnimationTimeout = 0;
     public FirespriteEntity(EntityType<? extends FirespriteEntity> entityType, World world) {
 
         super((EntityType<? extends HostileEntity>)entityType, world);
         this.setPathfindingPenalty(PathNodeType.WATER, -1.0f);
         this.setPathfindingPenalty(PathNodeType.LAVA, 4.0f);
-        this.setPathfindingPenalty(PathNodeType.DANGER_FIRE, 0.0f);
-        this.setPathfindingPenalty(PathNodeType.DAMAGE_FIRE, 0.0f);
-        this.moveControl = new FlightMoveControl(this, 2, false);
+        this.moveControl = new FlightMoveControl(this, 1, false);
         this.experiencePoints = 2;
     }
     @Override
@@ -77,13 +74,19 @@ public class FirespriteEntity extends HostileEntity {
     }
 
     @Override
+    public float getPathfindingFavor(BlockPos pos, WorldView world) {
+        if (world.getBlockState(pos).isAir()) {
+            return 10.0f;
+        }
+        return 0.0f;
+    }
+
+    @Override
     protected void initGoals() {
-        this.goalSelector.add(1,new SwimGoal(this));
         this.goalSelector.add(2, new FirespriteIgniteGoal(this));
         this.goalSelector.add(3, new FirespriteAttackGoal(this, 1.0, true));
-        this.goalSelector.add(5, new FlyGoal(this, 0.5));
-        this.goalSelector.add(6, new LookAtEntityGoal(this, PlayerEntity.class, 8.0f));
-        this.goalSelector.add(7, new LookAroundGoal(this));
+        this.goalSelector.add(5, new FirespriteWanderAroundGoal());
+        this.goalSelector.add(8,new SwimGoal(this));
         this.targetSelector.add(1, new ActiveTargetGoal<>(this, PlayerEntity.class, false, false));
     }
     public static DefaultAttributeContainer.Builder createFirespriteAttributes(){
@@ -117,6 +120,8 @@ public class FirespriteEntity extends HostileEntity {
 
     @Override
     public void tick() {
+
+
         if (this.isAlive()) {
             int i;
             this.lastFuseTime = this.currentFuseTime;
@@ -134,6 +139,22 @@ public class FirespriteEntity extends HostileEntity {
             }
         }
         super.tick();
+
+        if (this.getWorld().isClient()) {
+            setupAnimationStates();
+        }
+    }
+    @Override
+    public boolean hurtByWater() {
+        return true;
+    }
+    private void setupAnimationStates() {
+        if (this.idleAnimationTimeout <= 0) {
+            this.idleAnimationTimeout = this.random.nextInt(40) + 80;
+            this.idleAnimationState.start(this.age);
+        } else {
+            --this.idleAnimationTimeout;
+        }
     }
 
     @Override
@@ -264,6 +285,44 @@ public class FirespriteEntity extends HostileEntity {
         @Override
         public boolean shouldContinue() {
             return super.shouldContinue();
+        }
+    }
+
+    class FirespriteWanderAroundGoal
+            extends Goal {
+        private static final int MAX_DISTANCE = 22;
+
+        FirespriteWanderAroundGoal() {
+            this.setControls(EnumSet.of(Goal.Control.MOVE));
+        }
+
+        @Override
+        public boolean canStart() {
+            return FirespriteEntity.this.navigation.isIdle();
+        }
+
+        @Override
+        public boolean shouldContinue() {
+            return FirespriteEntity.this.navigation.isFollowingPath();
+        }
+
+        @Override
+        public void start() {
+            Vec3d vec3d = this.getRandomLocation();
+            if (vec3d != null) {
+                FirespriteEntity.this.navigation.startMovingAlong(FirespriteEntity.this.navigation.findPathTo(BlockPos.ofFloored(vec3d), 1), 1.0);
+            }
+        }
+
+        @Nullable
+        private Vec3d getRandomLocation() {
+            Vec3d vec3d2 = FirespriteEntity.this.getRotationVec(0.0f);
+            int i = 8;
+            Vec3d vec3d3 = AboveGroundTargeting.find(FirespriteEntity.this, 8, 7, vec3d2.x, vec3d2.z, 1.5707964f, 3, 1);
+            if (vec3d3 != null) {
+                return vec3d3;
+            }
+            return NoPenaltySolidTargeting.find(FirespriteEntity.this, 8, 4, -2, vec3d2.x, vec3d2.z, 1.5707963705062866);
         }
     }
 

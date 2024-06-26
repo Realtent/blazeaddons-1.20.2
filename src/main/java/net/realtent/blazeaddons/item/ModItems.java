@@ -5,10 +5,12 @@ import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
+import net.minecraft.item.SpawnEggItem;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.realtent.blazeaddons.BlazeAddons;
+import net.realtent.blazeaddons.entity.ModEntities;
 import net.realtent.blazeaddons.item.custom.BlazeboltItem;
 import net.realtent.blazeaddons.item.custom.MinirocketItem;
 import net.realtent.blazeaddons.item.custom.PrimedMinirocketItem;
@@ -18,6 +20,8 @@ public class ModItems {
     public static final Item PRIMED_MINIROCKET = registerItem("primed_minirocket", new PrimedMinirocketItem(new FabricItemSettings().maxCount(1)));
     public static final Item MINIROCKET = registerItem("minirocket", new MinirocketItem(new FabricItemSettings().maxCount(1)));
     public static final Item BLAZEBOLT = registerItem("blazebolt", new BlazeboltItem(new FabricItemSettings()));
+    public static final Item FIRESPRITE_SPAWN_EGG = registerItem("firesprite_spawn_egg",
+            new SpawnEggItem(ModEntities.FIRESPRITE, 0xfff87e, 0xb9931c, new FabricItemSettings()));
 
     private static void addItemsToIngredientTabItemGroup(FabricItemGroupEntries entries){
         entries.add(IMPACT_CASING);
